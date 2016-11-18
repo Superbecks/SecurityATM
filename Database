@@ -1,0 +1,37 @@
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.Socket;
+import java.sql.SQLException;
+//Dwayne Beckett
+
+import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+
+public class Database {
+	
+	private static java.sql.Connection connect = null;
+	Socket socket;
+	ObjectInputStream input;
+	ObjectOutputStream output;
+	
+	
+	public static java.sql.Connection GetConnection(){
+		try{
+			
+			if(connect == null){
+				MysqlDataSource data = new MysqlDataSource();
+				data.setUser("root");
+				data.setPassword("");
+				data.setURL("jdbc:mysql://localhost/dblab");
+				connect = data.getConnection();
+			}
+			
+			
+		}catch(SQLException e){
+			e.printStackTrace();
+			
+		}
+		
+		return connect;
+	}
+
+}
